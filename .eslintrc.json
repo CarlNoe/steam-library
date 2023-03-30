@@ -38,5 +38,17 @@
 			}
 		],
 		"no-shadow": "off"
-	}
+	},
+	"overrides": [
+		{
+			"files": ["*.js", "*.config.js"],
+			"excludedFiles": ["*.test.js"],
+			"rules": {
+				"@typescript-eslint/*": "off"
+			},
+			"parserOptions": {
+				"project": null
+			}
+		}
+	]
 }
