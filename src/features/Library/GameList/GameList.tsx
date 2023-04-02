@@ -12,6 +12,7 @@ function GameList() {
 					price={game.price}
 					releaseDate={game.releaseDate}
 					rating={game.rating}
+					platforms={game.platforms}
 				/>
 			))}
 		</main>
