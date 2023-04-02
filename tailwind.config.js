@@ -3,17 +3,8 @@ module.exports = {
 	content: ['./src/**/*.{js,jsx,ts,tsx}'],
 	theme: {
 		fontFamily: {
-			sans: [
-				'MotivaSans',
-				'system-ui',
-				'-apple-system',
-				'BlinkMacSystemFont',
-				'"Segoe UI"',
-				'Roboto',
-				'Helvetica',
-				'Arial',
-				'sans-serif',
-			],
+			arial: ['Arial', 'sans-serif'],
+			motiva: ['Motiva Sans', 'sans-serif'],
 		},
 		extend: {
 			colors: {
