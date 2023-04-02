@@ -13,8 +13,8 @@ function GameTile(props: GameTileProps) {
 		<div className="mb-2 flex h-20 bg-steam-dark bg-opacity-40 p-2">
 			<div className="flex flex-shrink-0 flex-col justify-around">
 				<img src={imageUrl} alt={title} className="h-10 w-[108px]" />
-				<div className="flex items-center justify-between text-[11px]">
-					<span>{releaseDate}</span>
+				<div className="flex items-center justify-between font-motiva text-[11px]">
+					<span className="opacity-[85%]">{releaseDate}</span>
 					<span className="text-steam-lightBlue">{rating}%</span>
 				</div>
 			</div>
