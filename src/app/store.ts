@@ -1,8 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
+import commonReducer from '../components/commonSlice';
 import libraryReducer from '../features/Library/librarySlice';
 
 export const store = configureStore({
 	reducer: {
+		common: commonReducer,
 		library: libraryReducer,
 	},
 });
