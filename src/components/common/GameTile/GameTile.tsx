@@ -34,7 +34,7 @@ function GameTile(props: GameTileProps) {
 			<div className="flex flex-shrink-0 flex-col justify-around">
 				<img src={headerImage} alt={name} className="h-10 w-[108px]" />
 				<div className="flex items-center justify-between font-motiva text-[11px]">
-					<span className="opacity-[85%]">{releaseDate}</span>
+					<span className="opacity-[50%]">{releaseDate}</span>
 					<span className="text-steam-lightBlue">{averageRating}%</span>
 				</div>
 			</div>
@@ -45,7 +45,9 @@ function GameTile(props: GameTileProps) {
 					{platforms.includes('mac') && <img src={mac} alt="Mac" />}
 					{platforms.includes('linux') && <img src={linux} alt="Linux" />}
 				</div>
-				<span className="self-end text-xs font-bold">{price}€</span>
+				<span className="self-end text-xs font-bold">
+					{Number(price) > 0 ? `${price}€` : 'Free-to-play'}
+				</span>
 			</div>
 		</div>
 	);

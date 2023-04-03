@@ -10,7 +10,7 @@ function GameList() {
 	useEffect(() => {
 		const fetchGames = async () => {
 			try {
-				const response = await getGamesByPaginationForTiles(0, 100);
+				const response = await getGamesByPaginationForTiles(100, 132);
 				setGames(response);
 			} catch (error) {
 				throw new Error(String(error));
