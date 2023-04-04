@@ -30,7 +30,7 @@ function GameList() {
 	useEffect(() => {
 		const fetchGames = async (page: number) => {
 			try {
-				const response = await getGamesByPaginationForTiles(page * 30, 30);
+				const response = await getGamesByPaginationForTiles(page, 30);
 				setGames((prevGames) => [...prevGames, ...response]);
 			} catch (error) {
 				throw new Error(String(error));
