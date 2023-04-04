@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import commonReducer from '../components/commonSlice';
+import commonReducer from '../components/common/commonSlice';
 import libraryReducer from '../features/Library/librarySlice';
 
 export const store = configureStore({

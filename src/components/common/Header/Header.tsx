@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import { toggleNav } from '../../commonSlice';
+import { toggleNav } from '../commonSlice';
 import steamWhite from '../../../assets/images/steamWhite.svg';
 import burger from '../../../assets/images/burger.png';
 

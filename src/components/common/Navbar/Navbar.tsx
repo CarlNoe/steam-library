@@ -1,10 +1,23 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../../app/store';
-import { toggleNav } from '../../commonSlice';
+import { toggleNav } from '../commonSlice';
 import avatar from '../../../assets/images/avatar.gif';
 import NavbarLink from './NavbarLink/NavbarLink';
 
-const names = ['Account', 'Favorites', 'Library'];
+const Links = [
+	{
+		url: '/auth',
+		name: 'Login/register',
+	},
+	{
+		url: '/',
+		name: 'Library',
+	},
+	{
+		url: '/favorites',
+		name: 'Favorites',
+	},
+];
 
 function Navbar() {
 	const dispatch = useDispatch();
@@ -41,8 +54,8 @@ function Navbar() {
 					<span className="opacity-80">Wallet (2,67€)</span>
 				</div>
 				<div className="flex flex-col">
-					{names.map((name) => (
-						<NavbarLink key={name} name={name} />
+					{Links.map((link) => (
+						<NavbarLink key={link.url} name={link.name} url={link.url} />
 					))}
 				</div>
 			</aside>
