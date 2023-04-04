@@ -1,3 +1,4 @@
+import React from 'react';
 import windows from '../../../assets/images/windows.png';
 import mac from '../../../assets/images/mac.png';
 import linux from '../../../assets/images/linux.png';
@@ -12,7 +13,7 @@ interface GameTileProps {
 	platforms: string;
 }
 
-function GameTile(props: GameTileProps) {
+const GameTile = React.memo((props: GameTileProps) => {
 	const {
 		name,
 		headerImage,
@@ -51,6 +52,6 @@ function GameTile(props: GameTileProps) {
 			</div>
 		</div>
 	);
-}
+});
 
 export default GameTile;
