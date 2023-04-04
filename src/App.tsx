@@ -1,9 +1,17 @@
-import { useState } from 'react';
+
+import singUpForm from './form/signUpForm';
+import singInForm from './form/signInForm';
 
 function App() {
-	const [count] = useState(0);
+	
+	return (
+		<div className="App">
+			<header className="App-header">
 
-	return <div>{count}</div>;
+				{singUpForm()}
+			</header>
+		</div>
+	);
 }
 
 export default App;
