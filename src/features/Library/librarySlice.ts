@@ -1,26 +1,30 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 
-// todo: change the slice
-
 interface LibraryState {
-	games: string[];
+	search: string;
+	currentFilter: string;
 }
 
 const initialState: LibraryState = {
-	games: [],
+	search: '',
+	currentFilter: 'default',
 };
 
 export const librarySlice = createSlice({
 	name: 'library',
 	initialState,
 	reducers: {
-		addGame: (state, action: PayloadAction<string>) => {
-			state.games.push(action.payload);
+		setSearch: (state, action: PayloadAction<string>) => {
+			state.search = action.payload;
+		},
+
+		setCurrentFilter: (state, action: PayloadAction<string>) => {
+			state.currentFilter = action.payload;
 		},
 	},
 });
 
-export const { addGame } = librarySlice.actions;
+export const { setSearch, setCurrentFilter } = librarySlice.actions;
 
 export default librarySlice.reducer;
