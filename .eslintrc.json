@@ -37,7 +37,11 @@
 				"jsx": "never"
 			}
 		],
-		"no-shadow": "off"
+		"no-shadow": "off",
+		// To allow redux toolkit to use immer:
+		"no-param-reassign": ["error", { "props": false }],
+		// To remove erros when using the vars from the DB that starts with _:
+		"no-underscore-dangle": "off"
 	},
 	"overrides": [
 		{

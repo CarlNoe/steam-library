@@ -1,15 +1,13 @@
-
-import singUpForm from './form/signUpForm';
-import singInForm from './form/signInForm';
+import Library from './features/Library/Library';
+import Header from './components/common/Header/Header';
+import Navbar from './components/common/Navbar/Navbar';
 
 function App() {
-	
 	return (
-		<div className="App">
-			<header className="App-header">
-
-				{singUpForm()}
-			</header>
+		<div className="min-h-screen">
+			<Navbar />
+			<Header />
+			<Library />
 		</div>
 	);
 }
