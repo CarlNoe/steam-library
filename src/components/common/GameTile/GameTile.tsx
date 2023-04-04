@@ -32,8 +32,8 @@ const GameTile = React.memo((props: GameTileProps) => {
 
 	return (
 		<div className="mb-2 flex h-20 bg-steam-dark bg-opacity-40 p-2">
-			<div className="flex flex-shrink-0 flex-col justify-around">
-				<img src={headerImage} alt={name} className="h-10 w-[108px]" />
+			<div className="flex flex-shrink-0 flex-col justify-between">
+				<img src={headerImage} alt={name} className="h-12" />
 				<div className="flex items-center justify-between font-motiva text-[11px]">
 					<span className="opacity-[50%]">{releaseDate}</span>
 					<span className="text-steam-lightBlue">{averageRating}%</span>
