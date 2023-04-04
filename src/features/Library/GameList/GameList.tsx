@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef, useCallback } from 'react';
 import { getGamesByPaginationForTiles } from '../../../api/gamesAPI';
 import GameTile from '../../../components/common/GameTile/GameTile';
+import GameFiltering from './GameFiltering/GameFiltering';
 import { GameDataForTiles } from '../../../types/gameTypes';
 
 function GameList() {
@@ -50,6 +51,7 @@ function GameList() {
 
 	return (
 		<main className="p-2">
+			<GameFiltering />
 			{!loading &&
 				games.map((game: GameDataForTiles, index: number) => (
 					<div

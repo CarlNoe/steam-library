@@ -41,7 +41,15 @@
 		// To allow redux toolkit to use immer:
 		"no-param-reassign": ["error", { "props": false }],
 		// To remove erros when using the vars from the DB that starts with _:
-		"no-underscore-dangle": "off"
+		"no-underscore-dangle": "off",
+		"jsx-a11y/label-has-associated-control": [
+			"error",
+			{
+				"required": {
+					"some": ["nesting", "id"]
+				}
+			}
+		]
 	},
 	"overrides": [
 		{
