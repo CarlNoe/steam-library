@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 function SignUpForm() {
@@ -6,13 +6,34 @@ function SignUpForm() {
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
 
+	const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+		e.preventDefault();
+		try {
+			const response = await fetch('http://localhost:8080/user/register', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify({ mail, username, password }),
+			});
+			const data = await response.json();
+			const { ...userData } = data;
+
+			// Stockage du reste des données dans le local storage
+			localStorage.setItem('registerData', JSON.stringify(userData));
+			window.location.href = '/SignIn';
+		} catch (error) {
+			throw new Error(String(error));
+		}
+	};
+
 	return (
-		<div className="flex min-h-screen items-center justify-center">
+		<div className="flex min-h-[calc(100vh-100px)] items-center justify-center">
 			<div className="rounded-lg bg-steam-grey px-12 py-8 shadow-lg">
 				<h1 className="mb-8 text-3xl font-medium text-white">
 					Create an account
 				</h1>
-				<form method="POST" action="http://localhost:8080/user/register">
+				<form onSubmit={handleFormSubmit}>
 					<div className="mb-6">
 						<label
 							htmlFor="mail"
@@ -22,9 +43,9 @@ function SignUpForm() {
 						</label>
 						<input
 							aria-label="Email address"
-							id="mail"
+							id="email"
 							name="mail"
-							type="email"
+							type="mail"
 							required
 							value={mail}
 							onChange={(e) => setMail(e.target.value)}
@@ -77,6 +98,7 @@ function SignUpForm() {
 						>
 							<Link to="/SignIn">Sign Up</Link>
 						</button>
+
 						<Link
 							to="/SignIn"
 							className="ml-4 font-medium hover:text-indigo-400"

@@ -1,4 +1,5 @@
 import { RawGameData, GameDataForTiles } from '../types/gameTypes';
+import { RawUserData } from '../types/userTypes';
 
 export interface RawApiData {
 	status: number;
@@ -7,6 +8,20 @@ export interface RawApiData {
 	_score: number;
 	_ignored: string[];
 	_source: RawGameData;
+}
+
+export interface RawApiUserData {
+	_index: string;
+	_id: string;
+	_score: number;
+	_ignored: string[];
+	_source: RawUserData;
+}
+
+export interface AutocompleteData {
+	_id: string;
+	name: string;
+	header_image: string;
 }
 
 export async function handleResponse(
