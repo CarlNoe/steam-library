@@ -46,6 +46,17 @@ async function fetchGameDetailsById(id: string): Promise<RawApiData> {
 	return response.json();
 }
 
+async function fetchGamesBySearchQueryForAutoCompletion(
+	search: string,
+	size: number,
+	from: number
+): Promise<RawApiData[]> {
+	const response = await fetch(
+		`${API_BASE_URL}/games/from/${from}/size/${size}/searchAutocompletion/${search}`
+	);
+	return handleResponse(response);
+}
+
 // Get data formatted for tiles
 
 export async function getSortedPaginatedGamesForTiles(
@@ -83,4 +94,14 @@ export async function getGamesBySearchQueryForTiles(
 export async function getGameDetailsById(id: string): Promise<RawGameData> {
 	const rawGameData = await fetchGameDetailsById(id);
 	return rawGameData._source;
+}
+
+export async function getGamesBySearchQueryForAutoCompletion(
+	search: string,
+	size: number,
+	from: number
+) {
+	const resultForAutoCompletion =
+		await fetchGamesBySearchQueryForAutoCompletion(search, size, from);
+	return resultForAutoCompletion;
 }
