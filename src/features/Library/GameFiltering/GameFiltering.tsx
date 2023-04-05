@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useState, FormEvent } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../../app/store';
 import { setSearch, setCurrentFilter } from '../librarySlice';
@@ -16,11 +16,19 @@ function GameFiltering() {
 	};
 
 	const handleSelectChange = (e: ChangeEvent<HTMLSelectElement>) => {
+		setSearchValue('');
+		dispatch(setSearch(''));
 		dispatch(setCurrentFilter(e.target.value as FilterValue));
 	};
 
 	const handleButtonClick = () => {
+		dispatch(setCurrentFilter('default'));
 		dispatch(setSearch(searchValue));
+	};
+
+	const handleSubmit = (e: FormEvent) => {
+		e.preventDefault();
+		handleButtonClick();
 	};
 
 	// The type insure that the value concists of a field name and a sorting order
@@ -42,7 +50,10 @@ function GameFiltering() {
 
 	return (
 		<div className="mb-2 flex h-20 bg-steam-dark p-2 font-arial">
-			<form className="flex w-full flex-col justify-between">
+			<form
+				className="flex w-full flex-col justify-between"
+				onSubmit={handleSubmit}
+			>
 				<div className="flex items-center">
 					<label
 						htmlFor="filter"
@@ -74,7 +85,7 @@ function GameFiltering() {
 						onChange={handleInputChange}
 					/>
 					<button
-						type="button"
+						type="submit"
 						className="rounded-xs border-2 border-none bg-steam-medBlue p-2 text-xs font-thin text-steam-lightBlue opacity-90"
 						onClick={handleButtonClick}
 					>
