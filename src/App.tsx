@@ -3,6 +3,8 @@ import Library from './features/Library/Library';
 import Header from './components/common/Header/Header';
 import Navbar from './components/common/Navbar/Navbar';
 import Favorite from './features/Favorite/Favorite';
+import SignUp from './features/SignUp/signUpForm';
+import SignIn from './features/SignIn/signInForm';
 
 function App() {
 	const routes = [
@@ -11,8 +13,12 @@ function App() {
 			element: <Library />,
 		},
 		{
-			path: '/auth',
-			element: <div>Put login page in App.tsx</div>,
+			path: '/SignUp',
+			element: <SignUp />,
+		},
+		{
+			path: '/SignIn',
+			element: <SignIn />,
 		},
 		{
 			path: '/favorites',
