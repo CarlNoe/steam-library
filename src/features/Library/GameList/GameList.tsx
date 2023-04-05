@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef, useCallback } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../../app/store';
+import { resetFilter } from '../librarySlice';
 
 import GameTile from '../../../components/common/GameTile/GameTile';
 import GameFiltering from '../GameFiltering/GameFiltering';
@@ -8,6 +9,8 @@ import { GameDataForTiles } from '../../../types/gameTypes';
 import loadGames from './loadGames';
 
 function GameList() {
+	const dispatch = useDispatch();
+
 	const [games, setGames] = useState<GameDataForTiles[]>([]);
 	const [loading, setLoading] = useState<boolean>(true);
 	const [page, setPage] = useState<number>(0);
@@ -18,6 +21,8 @@ function GameList() {
 	const currentFilter = useSelector(
 		(state: RootState) => state.library.currentFilter
 	);
+
+	const search = useSelector((state: RootState) => state.library.search);
 
 	const lastGameElementRef = useCallback(
 		(node: HTMLDivElement | null) => {
@@ -47,12 +52,12 @@ function GameList() {
 		} else {
 			isMounted.current = true;
 		}
-	}, [currentFilter]);
+	}, [currentFilter, search]);
 
 	useEffect(() => {
 		const loadGamesWrapper = async (page: number) => {
 			setLoading(true);
-			const response = await loadGames(page, currentFilter);
+			const response = await loadGames(page, currentFilter, search);
 			setLoading(false);
 
 			if (page === 0) {
@@ -63,7 +68,14 @@ function GameList() {
 		};
 
 		loadGamesWrapper(page);
-	}, [page, currentFilter]);
+	}, [page, currentFilter, search]);
+
+	// Reset the filter when a search is performed
+	useEffect(() => {
+		if (search !== '') {
+			dispatch(resetFilter());
+		}
+	}, [search, dispatch]);
 
 	return (
 		<main className="p-2">

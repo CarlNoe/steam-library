@@ -1,6 +1,7 @@
 import {
 	getGamesByPaginationForTiles,
 	getGamesByPaginationAndSortForTiles,
+	getGamesBySearchForTiles,
 } from '../../../api/gamesAPI';
 import { GameDataForTiles } from '../../../types/gameTypes';
 import splitFilterValueString from '../../../utils/utils';
@@ -10,9 +11,14 @@ const GAMES_PER_PAGE = 30;
 
 const loadGames = async (
 	page: number,
-	currentFilter: FilterValue
+	currentFilter: FilterValue,
+	search: string
 ): Promise<GameDataForTiles[]> => {
 	try {
+		if (search !== '') {
+			const response = await getGamesBySearchForTiles(search, GAMES_PER_PAGE);
+			return response;
+		}
 		if (currentFilter === 'default') {
 			const response = await getGamesByPaginationForTiles(
 				page * GAMES_PER_PAGE,

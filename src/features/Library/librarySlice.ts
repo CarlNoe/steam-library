@@ -23,9 +23,13 @@ export const librarySlice = createSlice({
 		setCurrentFilter: (state, action: PayloadAction<FilterValue>) => {
 			state.currentFilter = action.payload;
 		},
+		resetFilter: (state) => {
+			state.currentFilter = 'default';
+		},
 	},
 });
 
-export const { setSearch, setCurrentFilter } = librarySlice.actions;
+export const { setSearch, setCurrentFilter, resetFilter } =
+	librarySlice.actions;
 
 export default librarySlice.reducer;
