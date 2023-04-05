@@ -58,9 +58,9 @@ function GameFiltering() {
 					<label
 						htmlFor="filter"
 						className="mr-2 font-extralight opacity-90"
-						aria-label="Filter by"
+						aria-label="Sort by"
 					>
-						Filter by:
+						Sort by:
 					</label>
 					<select
 						name="filter"
