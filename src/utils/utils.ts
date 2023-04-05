@@ -4,7 +4,7 @@ import {
 	SortOrder,
 } from '../types/gameFilteringTypes';
 
-const splitFilterValueString = (
+export const splitFilterValueString = (
 	value: FilterValue
 ): [SortableFields, SortOrder] => {
 	const fieldAndOrder = value.match(/(.*?)_([^_]*)$/);
@@ -14,4 +14,4 @@ const splitFilterValueString = (
 	throw new Error(`Invalid filter value: ${value}`);
 };
 
-export default splitFilterValueString;
+export const splitBySemicolon = (value: string): string[] => value.split(';');

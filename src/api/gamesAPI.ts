@@ -1,4 +1,4 @@
-import { GameDataForTiles } from '../types/gameTypes';
+import { RawGameData, GameDataForTiles } from '../types/gameTypes';
 import { handleResponse, mapGameData, RawApiData } from './apiUtils';
 
 const API_BASE_URL = 'http://localhost:8080';
@@ -37,6 +37,14 @@ async function fetchGamesBySearchQuery(
 	return handleResponse(response);
 }
 
+async function fetchGameDetailsById(id: string): Promise<RawApiData> {
+	const response = await fetch(`${API_BASE_URL}/games/${id}`);
+	if (!response.ok) {
+		throw new Error(`Error: ${response.statusText}`);
+	}
+	return response.json();
+}
+
 // Get data formatted for tiles
 
 export async function getSortedPaginatedGamesForTiles(
@@ -68,4 +76,9 @@ export async function getGamesBySearchQueryForTiles(
 ): Promise<GameDataForTiles[]> {
 	const rawGameData = await fetchGamesBySearchQuery(search, size);
 	return rawGameData.map(mapGameData);
+}
+
+export async function getGameDetailsById(id: string): Promise<RawGameData> {
+	const rawGameData = await fetchGameDetailsById(id);
+	return rawGameData._source;
 }

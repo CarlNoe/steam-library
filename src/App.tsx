@@ -3,7 +3,7 @@ import Header from './components/common/Header/Header';
 import Navbar from './components/common/Navbar/Navbar';
 
 import Library from './features/Library/Library';
-import GameDetails from './features/GameDetails/GameDetails';
+import GameDetails from './features/Library/GameDetails/GameDetails';
 
 function App() {
 	const routes = [
