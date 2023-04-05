@@ -1,28 +1,10 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { RawApiData } from '../../api/apiUtils';
-import { insertUserToElasticSearch } from '../../api/insertUserApi';
 
 function SignUpForm() {
 	const [mail, setMail] = useState('');
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
-
-	function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-		e.preventDefault();
-
-		const data = {
-			mail,
-			username,
-			password,
-		};
-
-		insertUserToElasticSearch(data)
-			.then((responseData: RawApiData[]) => responseData)
-			.catch((error: Error) => {
-				throw error;
-			});
-	}
 
 	return (
 		<div className="flex min-h-screen items-center justify-center">
@@ -30,7 +12,7 @@ function SignUpForm() {
 				<h1 className="mb-8 text-3xl font-medium text-white">
 					Create an account
 				</h1>
-				<form onSubmit={handleSubmit}>
+				<form method="POST" action="http://localhost:8080/user/register">
 					<div className="mb-6">
 						<label
 							htmlFor="email"
