@@ -53,30 +53,31 @@ function GameDetails() {
 
 	return (
 		<main className="bg-steam-dark font-motiva">
-			<img src={headerImage} alt={name} className="w-full" />
-			<div className="px-2 py-4">
-				<GameMainInfos
-					name={name}
-					releaseDate={releaseDate}
-					developer={developer}
-					publisher={publisher}
-				/>
-				<p className="mb-4">{shortDescription}</p>
-				<GameTags genres={genres} />
-				<GameRating
-					positiveRatings={positiveRatings}
-					negativeRatings={negativeRatings}
-				/>
-				<GameCarousel mediaItems={mediaItems} />
-				<button
-					type="button"
-					className="mb-4 rounded-sm bg-steam-darkBlue px-4 py-2 font-bold text-steam-lightBlue"
-				>
-					Add to Favorites
-				</button>
-				{/* todo: add an indicator if already favorited */}
-				<GameAddToCart price={price} name={name} />
-				<GameDetailedDesc detailedDesc={detailedDescription} />
+			<div className="mx-auto xl:w-[50%]">
+				<img src={headerImage} alt={name} className="w-full" />
+				<div className="px-2 py-4">
+					<GameMainInfos
+						name={name}
+						releaseDate={releaseDate}
+						developer={developer}
+						publisher={publisher}
+					/>
+					<p className="mb-4">{shortDescription}</p>
+					<GameTags genres={genres} />
+					<GameRating
+						positiveRatings={positiveRatings}
+						negativeRatings={negativeRatings}
+					/>
+					<GameCarousel mediaItems={mediaItems} />
+					<button
+						type="button"
+						className="mb-4 rounded-sm bg-steam-darkBlue px-4 py-2 font-bold text-steam-lightBlue"
+					>
+						Add to Favorites
+					</button>
+					<GameAddToCart price={price} name={name} />
+					<GameDetailedDesc detailedDesc={detailedDescription} />
+				</div>
 			</div>
 		</main>
 	);
