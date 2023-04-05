@@ -35,15 +35,12 @@ const GameTile = React.memo((props: GameTileProps) => {
 
 	return (
 		<Link to={link}>
-			<div className="mb-2 flex h-20 bg-steam-dark bg-opacity-40 p-2">
+			<div className="mb-2 flex h-20 rounded-md bg-steam-dark bg-opacity-40 p-2 hover:bg-opacity-80">
 				<div className="flex flex-shrink-0 flex-col justify-between">
 					<img
-						src={
-							headerImage ||
-							'https://fakeimg.pl/350x200/?text=NoImage&font=lobster'
-						}
+						src={headerImage || 'https://fakeimg.pl/350x200/?text=NoImage'}
 						alt={name}
-						className="h-12"
+						className="h-12 rounded-sm"
 					/>
 					<div className="flex items-center justify-between font-motiva text-[11px]">
 						<span className="opacity-[50%]">{releaseDate || 'TBA'}</span>

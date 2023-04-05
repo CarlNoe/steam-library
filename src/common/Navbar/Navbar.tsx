@@ -9,21 +9,10 @@ const Links = [
 		url: '/',
 		name: 'Library',
 	},
-].concat(
-	localStorage.getItem('userData') !== null
-		? [
-				{
-					url: '/favorites',
-					name: 'Favorites',
-				},
-		  ]
-		: [
-				{
-					url: '/SignIn',
-					name: 'Sign In',
-				},
-		  ]
-);
+	...(localStorage.getItem('userData')
+		? [{ url: '/favorites', name: 'Favorites' }]
+		: [{ url: '/SignIn', name: 'Sign In' }]),
+];
 
 function SignOut() {
 	localStorage.clear();
@@ -37,6 +26,10 @@ function Navbar() {
 	const handleClick = () => {
 		dispatch(toggleNav());
 	};
+
+	const getUsername = () =>
+		JSON.parse(localStorage.getItem('userData') || '{}').username ||
+		'Not connected';
 
 	const lateralNavClassNames = `fixed left-0 top-0 z-50 h-screen w-[280px] bg-steam-dark py-6 font-motiva shadow-2xl ${
 		isNavOpen ? ' translate-x-0 transform' : ' -translate-x-full transform'
@@ -59,35 +52,28 @@ function Navbar() {
 							alt="Avatar"
 							className="mr-4 h-10 w-10 rounded-full"
 						/>
-						<span className="text-xl opacity-80">
-							{JSON.parse(localStorage.getItem('userData') || '{}').username
-								? JSON.parse(localStorage.getItem('userData') || '{}').username
-								: 'Not connected'}
-						</span>
+						<span className="text-xl opacity-80">{getUsername()}</span>
 					</div>
 					<span className="opacity-80">Cart (0)</span>
-					<span className="opacity-80">Wallet (2,67€)</span>
+					<span className="opacity-80">Wallet (0.00€)</span>
 				</div>
 				<div className="flex flex-col">
 					{Links.map((link) => (
 						<NavbarLink key={link.url} name={link.name} url={link.url} />
 					))}
 				</div>
-				<div className="flex justify-center">
-					{localStorage.getItem('userData') != null ? (
+				{localStorage.getItem('userData') && (
+					<div className="flex justify-center">
 						<button
 							type="button"
-							className="absolute bottom-0"
+							className="absolute bottom-4 left-4 opacity-75 hover:opacity-100"
 							onClick={SignOut}
 						>
-							Sign Out{' '}
+							Sign Out
 						</button>
-					) : (
-						<div />
-					)}
-				</div>
+					</div>
+				)}
 			</aside>
-			{/* Background blur: */}
 			<button
 				type="button"
 				className={bgBlurClassNames}

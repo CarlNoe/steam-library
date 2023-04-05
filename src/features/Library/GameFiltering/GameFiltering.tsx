@@ -98,7 +98,7 @@ function GameFiltering() {
 	};
 
 	return (
-		<div className="mb-2 flex h-20 bg-steam-dark p-2 font-arial">
+		<div className="mb-2 flex h-20 rounded bg-steam-dark p-2 font-arial">
 			<form
 				className="flex w-full flex-col justify-between"
 				onSubmit={handleSubmit}
@@ -114,7 +114,7 @@ function GameFiltering() {
 					<select
 						name="filter"
 						id="filter"
-						className="rounded-xs border-2 border-none bg-steam-medBlue py-1 text-xs font-thin text-steam-lightBlue opacity-90"
+						className="rounded-xs rounded-sm border-2 border-none bg-steam-medBlue py-1 text-xs font-thin text-steam-lightBlue opacity-90"
 						value={currentFilter}
 						onChange={handleSelectChange}
 					>
@@ -128,7 +128,7 @@ function GameFiltering() {
 				<div className="relative flex items-center">
 					<input
 						type="text"
-						className="rounded-xs mr-2 w-full border-2 border-none bg-steam-medBlue p-2 text-xs font-thin opacity-90 focus:outline-none"
+						className="rounded-xs mr-2 w-full rounded-sm border-2 border-none bg-steam-medBlue p-2 text-xs font-thin opacity-90 focus:outline-none"
 						placeholder="Game to research..."
 						value={searchValue}
 						onChange={handleInputChange}
@@ -136,7 +136,7 @@ function GameFiltering() {
 					{renderSuggestions()}
 					<button
 						type="submit"
-						className="rounded-xs border-2 border-none bg-steam-medBlue p-2 text-xs font-thin text-steam-lightBlue opacity-90"
+						className="rounded-xs rounded-sm border-2 border-none bg-steam-medBlue p-2 text-xs font-thin text-steam-lightBlue opacity-90"
 						onClick={handleButtonClick}
 					>
 						Research
