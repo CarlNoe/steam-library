@@ -1,7 +1,15 @@
 import { useEffect, useState, useRef, useCallback } from 'react';
-import { getGamesByPaginationForTiles } from '../../../api/gamesAPI';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../app/store';
+
+import {
+	getGamesByPaginationForTiles,
+	getGamesByPaginationAndSortForTiles,
+} from '../../../api/gamesAPI';
+
 import GameTile from '../../../components/common/GameTile/GameTile';
 import GameFiltering from './GameFiltering/GameFiltering';
+import splitFilterValueString from '../../../utils/utils';
 import { GameDataForTiles } from '../../../types/gameTypes';
 
 function GameList() {
@@ -9,8 +17,11 @@ function GameList() {
 	const [loading, setLoading] = useState<boolean>(true);
 	const [page, setPage] = useState<number>(0);
 	const observer = useRef<IntersectionObserver | null>(null);
-	// isMounted is used since useEffect is called twice during the initial render because of React.StrictMode
 	const isMounted = useRef(false);
+
+	const currentFilter = useSelector(
+		(state: RootState) => state.library.currentFilter
+	);
 
 	const lastGameElementRef = useCallback(
 		(node: HTMLDivElement | null) => {
@@ -31,8 +42,18 @@ function GameList() {
 	useEffect(() => {
 		const fetchGames = async (page: number) => {
 			try {
-				const response = await getGamesByPaginationForTiles(page * 30, 30);
-				setGames((prevGames) => [...prevGames, ...response]);
+				if (currentFilter === 'default') {
+					const response = await getGamesByPaginationForTiles(page * 30, 30);
+					setGames((prevGames) => [...prevGames, ...response]);
+				} else {
+					const response = await getGamesByPaginationAndSortForTiles(
+						page * 30,
+						30,
+						...splitFilterValueString(currentFilter)
+					);
+
+					setGames((prevGames) => [...prevGames, ...response]);
+				}
 			} catch (error) {
 				throw new Error(String(error));
 			} finally {
@@ -40,14 +61,17 @@ function GameList() {
 			}
 		};
 
-		// This condition is used to check if the component is mounted because
-		// of React.StrictMode which called useEffect twice during the initial render
 		if (!isMounted.current) {
 			isMounted.current = true;
 		} else {
 			fetchGames(page);
 		}
-	}, [page]);
+	}, [page, currentFilter]);
+
+	useEffect(() => {
+		setGames([]);
+		setPage(0);
+	}, [currentFilter]);
 
 	return (
 		<main className="p-2">

@@ -1,9 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
+import type { FilterValue } from '../../types/gameFilteringTypes';
 
 interface LibraryState {
 	search: string;
-	currentFilter: string;
+	currentFilter: FilterValue;
 }
 
 const initialState: LibraryState = {
@@ -19,7 +20,7 @@ export const librarySlice = createSlice({
 			state.search = action.payload;
 		},
 
-		setCurrentFilter: (state, action: PayloadAction<string>) => {
+		setCurrentFilter: (state, action: PayloadAction<FilterValue>) => {
 			state.currentFilter = action.payload;
 		},
 	},

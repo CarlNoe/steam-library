@@ -2,6 +2,10 @@ import { ChangeEvent, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../../../app/store';
 import { setSearch, setCurrentFilter } from '../../librarySlice';
+import {
+	FilterOption,
+	FilterValue,
+} from '../../../../types/gameFilteringTypes';
 
 function GameFiltering() {
 	const dispatch = useDispatch();
@@ -15,20 +19,28 @@ function GameFiltering() {
 	};
 
 	const handleSelectChange = (e: ChangeEvent<HTMLSelectElement>) => {
-		dispatch(setCurrentFilter(e.target.value));
+		dispatch(setCurrentFilter(e.target.value as FilterValue));
 	};
 
 	const handleButtonClick = () => {
 		dispatch(setSearch(searchValue));
 	};
 
-	const filterOptions = [
-		{ value: 'default', name: 'Default' },
-		{ value: 'name', name: 'Name' },
-		{ value: 'releaseDate', name: 'Release Date' },
-		{ value: 'price', name: 'Price' },
-		{ value: 'positiveRatings', name: 'Positive Ratings' },
-		{ value: 'negativeRatings', name: 'Negative Ratings' },
+	// The type insure that the value concists of a field name and a sorting order
+	const filterOptions: FilterOption[] = [
+		{ name: 'Default', value: 'default' },
+		{ name: 'Name A-Z', value: 'name_asc' },
+		{ name: 'Name Z-A', value: 'name_desc' },
+		{ name: 'Price low-high', value: 'price_asc' },
+		{ name: 'Price high-low', value: 'price_desc' },
+		{ name: 'Release new-old', value: 'release_date_asc' },
+		{ name: 'Release old-new', value: 'release_date_desc' },
+		{ name: 'Developer A-Z', value: 'developer_asc' },
+		{ name: 'Developer Z-A', value: 'developer_desc' },
+		{ name: 'Publisher A-Z', value: 'publisher_asc' },
+		{ name: 'Publisher Z-A', value: 'publisher_desc' },
+		{ name: 'Age low-high', value: 'required_age_asc' },
+		{ name: 'Age high-low', value: 'required_age_desc' },
 	];
 
 	return (
