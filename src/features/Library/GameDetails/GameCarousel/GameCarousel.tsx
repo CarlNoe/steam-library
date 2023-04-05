@@ -1,4 +1,3 @@
-import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/swiper-bundle.css';
 
@@ -17,7 +16,6 @@ function GameCarousel(props: GameCarouselProps) {
 			<Swiper
 				spaceBetween={10}
 				slidesPerView={1}
-				navigation
 				pagination={{ clickable: true }}
 				scrollbar={{ draggable: true }}
 			>
