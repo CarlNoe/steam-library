@@ -70,7 +70,8 @@ function GameDetails() {
 						negativeRatings={negativeRatings}
 					/>
 					<GameCarousel mediaItems={mediaItems} />
-					<GameAddToFavBtn gameId={id} />
+					{localStorage.getItem('userData') && <GameAddToFavBtn gameId={id} />}
+
 					<GameAddToCart price={price} name={name} />
 					<GameDetailedDesc detailedDesc={detailedDescription} />
 				</div>
