@@ -13,6 +13,7 @@ function GameList() {
 	const [page, setPage] = useState<number>(0);
 	const observer = useRef<IntersectionObserver | null>(null);
 	const isMounted = useRef(false);
+	const loadMoreTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
 
 	const currentFilter = useSelector(
 		(state: RootState) => state.library.currentFilter
@@ -25,7 +26,12 @@ function GameList() {
 			if (observer.current) observer.current.disconnect();
 			observer.current = new IntersectionObserver((entries) => {
 				if (entries[0].isIntersecting) {
-					setPage((prevPage) => prevPage + 1);
+					if (loadMoreTimeout.current) {
+						clearTimeout(loadMoreTimeout.current);
+					}
+					loadMoreTimeout.current = setTimeout(() => {
+						setPage((prevPage) => prevPage + 1);
+					}, 50);
 				}
 			});
 
@@ -35,29 +41,29 @@ function GameList() {
 	);
 
 	useEffect(() => {
+		if (isMounted.current) {
+			setGames([]);
+			setPage(0);
+		} else {
+			isMounted.current = true;
+		}
+	}, [currentFilter]);
+
+	useEffect(() => {
 		const loadGamesWrapper = async (page: number) => {
-			try {
-				setLoading(true);
-				const response = await loadGames(page, currentFilter);
+			setLoading(true);
+			const response = await loadGames(page, currentFilter);
+			setLoading(false);
+
+			if (page === 0) {
+				setGames(response);
+			} else {
 				setGames((prevGames) => [...prevGames, ...response]);
-			} catch (error) {
-				throw new Error(String(error));
-			} finally {
-				setLoading(false);
 			}
 		};
 
-		if (!isMounted.current) {
-			isMounted.current = true;
-		} else {
-			loadGamesWrapper(page);
-		}
+		loadGamesWrapper(page);
 	}, [page, currentFilter]);
-
-	useEffect(() => {
-		setGames([]);
-		setPage(0);
-	}, [currentFilter]);
 
 	return (
 		<main className="p-2">

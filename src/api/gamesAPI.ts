@@ -3,6 +3,8 @@ import { handleResponse, mapGameData, RawApiData } from './apiUtils';
 
 const API_BASE_URL = 'http://localhost:8080';
 
+// Fetch data from API
+
 async function fetchGamesByPagination(
 	from: number,
 	size: number
@@ -25,6 +27,18 @@ async function fetchGamesByPaginationAndSort(
 	return handleResponse(response);
 }
 
+async function fetchGamesBySearch(
+	search: string,
+	size: number
+): Promise<RawApiData[]> {
+	const response = await fetch(
+		`${API_BASE_URL}/games/size/${size}/search/${search}`
+	);
+	return handleResponse(response);
+}
+
+// Get data formatted for tiles
+
 export async function getGamesByPaginationForTiles(
 	from: number,
 	size: number
@@ -45,5 +59,13 @@ export async function getGamesByPaginationAndSortForTiles(
 		field,
 		order
 	);
+	return rawGameData.map(mapGameData);
+}
+
+export async function getGamesBySearchForTiles(
+	search: string,
+	size: number
+): Promise<GameDataForTiles[]> {
+	const rawGameData = await fetchGamesBySearch(search, size);
 	return rawGameData.map(mapGameData);
 }
