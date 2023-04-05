@@ -50,7 +50,7 @@ const GameTile = React.memo((props: GameTileProps) => {
 						<span className="text-steam-lightBlue">
 							{Number(positiveRatings) > 0 && Number(negativeRatings) > 0
 								? `${averageRating}%`
-								: 'No ratings'}
+								: ''}
 						</span>
 					</div>
 				</div>
