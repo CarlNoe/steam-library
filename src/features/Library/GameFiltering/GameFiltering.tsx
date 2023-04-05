@@ -1,11 +1,8 @@
 import { ChangeEvent, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { RootState } from '../../../../app/store';
-import { setSearch, setCurrentFilter } from '../../librarySlice';
-import {
-	FilterOption,
-	FilterValue,
-} from '../../../../types/gameFilteringTypes';
+import { RootState } from '../../../app/store';
+import { setSearch, setCurrentFilter } from '../librarySlice';
+import { FilterOption, FilterValue } from '../../../types/gameFilteringTypes';
 
 function GameFiltering() {
 	const dispatch = useDispatch();

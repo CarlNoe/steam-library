@@ -2,15 +2,10 @@ import { useEffect, useState, useRef, useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../app/store';
 
-import {
-	getGamesByPaginationForTiles,
-	getGamesByPaginationAndSortForTiles,
-} from '../../../api/gamesAPI';
-
 import GameTile from '../../../components/common/GameTile/GameTile';
-import GameFiltering from './GameFiltering/GameFiltering';
-import splitFilterValueString from '../../../utils/utils';
+import GameFiltering from '../GameFiltering/GameFiltering';
 import { GameDataForTiles } from '../../../types/gameTypes';
+import loadGames from './loadGames';
 
 function GameList() {
 	const [games, setGames] = useState<GameDataForTiles[]>([]);
@@ -40,20 +35,11 @@ function GameList() {
 	);
 
 	useEffect(() => {
-		const fetchGames = async (page: number) => {
+		const loadGamesWrapper = async (page: number) => {
 			try {
-				if (currentFilter === 'default') {
-					const response = await getGamesByPaginationForTiles(page * 30, 30);
-					setGames((prevGames) => [...prevGames, ...response]);
-				} else {
-					const response = await getGamesByPaginationAndSortForTiles(
-						page * 30,
-						30,
-						...splitFilterValueString(currentFilter)
-					);
-
-					setGames((prevGames) => [...prevGames, ...response]);
-				}
+				setLoading(true);
+				const response = await loadGames(page, currentFilter);
+				setGames((prevGames) => [...prevGames, ...response]);
 			} catch (error) {
 				throw new Error(String(error));
 			} finally {
@@ -64,7 +50,7 @@ function GameList() {
 		if (!isMounted.current) {
 			isMounted.current = true;
 		} else {
-			fetchGames(page);
+			loadGamesWrapper(page);
 		}
 	}, [page, currentFilter]);
 
@@ -76,23 +62,23 @@ function GameList() {
 	return (
 		<main className="p-2">
 			<GameFiltering />
-			{!loading &&
-				games.map((game: GameDataForTiles, index: number) => (
-					<div
-						ref={index === games.length - 1 ? lastGameElementRef : null}
-						key={game.docId}
-					>
-						<GameTile
-							name={game.name}
-							headerImage={game.headerImage}
-							price={game.price}
-							releaseDate={game.releaseDate}
-							positiveRatings={game.positiveRatings}
-							negativeRatings={game.negativeRatings}
-							platforms={game.platforms}
-						/>
-					</div>
-				))}
+			{games.map((game: GameDataForTiles, index: number) => (
+				<div
+					ref={index === games.length - 1 ? lastGameElementRef : null}
+					key={game.docId}
+				>
+					<GameTile
+						name={game.name}
+						headerImage={game.headerImage}
+						price={game.price}
+						releaseDate={game.releaseDate}
+						positiveRatings={game.positiveRatings}
+						negativeRatings={game.negativeRatings}
+						platforms={game.platforms}
+					/>
+				</div>
+			))}
+			{loading && <div>Loading...</div>}
 		</main>
 	);
 }
