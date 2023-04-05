@@ -1,3 +1,4 @@
+// loadGames.ts
 import {
 	getSortedPaginatedGamesForTiles,
 	getGamesByPaginationAndSortForTiles,
@@ -17,7 +18,8 @@ const loadGames = async (
 		if (search !== '') {
 			const response = await getGamesBySearchQueryForTiles(
 				search,
-				gamesPerPage
+				gamesPerPage,
+				page * gamesPerPage
 			);
 			return response;
 		}

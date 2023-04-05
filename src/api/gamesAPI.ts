@@ -29,10 +29,11 @@ async function fetchPaginatedGamesAndSort(
 
 async function fetchGamesBySearchQuery(
 	search: string,
-	size: number
+	size: number,
+	from: number
 ): Promise<RawApiData[]> {
 	const response = await fetch(
-		`${API_BASE_URL}/games/size/${size}/search/${search}`
+		`${API_BASE_URL}/games/from/${from}/size/${size}/search/${search}`
 	);
 	return handleResponse(response);
 }
@@ -72,9 +73,10 @@ export async function getGamesByPaginationAndSortForTiles(
 
 export async function getGamesBySearchQueryForTiles(
 	search: string,
-	size: number
+	size: number,
+	from: number
 ): Promise<GameDataForTiles[]> {
-	const rawGameData = await fetchGamesBySearchQuery(search, size);
+	const rawGameData = await fetchGamesBySearchQuery(search, size, from);
 	return rawGameData.map(mapGameData);
 }
 
