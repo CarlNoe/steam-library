@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
 import React from 'react';
-import windows from '../../../assets/images/windows.png';
-import mac from '../../../assets/images/mac.png';
-import linux from '../../../assets/images/linux.png';
+import windows from '../../assets/images/windows.png';
+import mac from '../../assets/images/mac.png';
+import linux from '../../assets/images/linux.png';
 
 interface GameTileProps {
 	link: string;

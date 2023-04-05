@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { getGameDetailsById } from '../../../api/gamesAPI';
-import { RawGameData } from '../../../types/gameTypes';
+import { getGameDetailsById } from '../../api/gamesAPI';
+import { RawGameData } from '../../types/gameTypes';
 
 import GameCarousel from './GameCarousel/GameCarousel';
 import GameMainInfos from './GameMainInfos/GameMainInfos';

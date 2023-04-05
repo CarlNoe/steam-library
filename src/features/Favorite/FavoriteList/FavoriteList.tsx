@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { GameDataForTiles } from '../../../types/gameTypes';
-import GameTile from '../../../components/common/GameTile/GameTile';
+import GameTile from '../../../common/GameTile/GameTile';
 import { getFavoriteGames } from '../../../api/favoritesAPI';
 
 function FavoriteList() {

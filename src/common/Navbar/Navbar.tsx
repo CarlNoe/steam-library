@@ -1,8 +1,8 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { RootState } from '../../../app/store';
+import { RootState } from '../../app/store';
 import { toggleNav } from '../commonSlice';
-import avatar from '../../../assets/images/avatar.gif';
+import avatar from '../../assets/images/avatar.gif';
 import NavbarLink from './NavbarLink/NavbarLink';
 
 const Links = [

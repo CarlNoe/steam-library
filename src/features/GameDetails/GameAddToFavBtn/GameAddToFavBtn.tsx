@@ -1,4 +1,4 @@
-import { addGameToFavorites } from '../../../../api/favoritesAPI';
+import { addGameToFavorites } from '../../../api/favoritesAPI';
 
 interface GameAddToFavBtnProps {
 	gameId: string;

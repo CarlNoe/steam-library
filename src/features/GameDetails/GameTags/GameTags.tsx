@@ -1,4 +1,4 @@
-import { splitBySemicolon } from '../../../../utils/utils';
+import { splitBySemicolon } from '../../../utils/utils';
 
 interface GameTagsProps {
 	genres: string;

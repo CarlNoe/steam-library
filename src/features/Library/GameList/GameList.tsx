@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../../app/store';
 import { resetFilter } from '../librarySlice';
 
-import GameTile from '../../../components/common/GameTile/GameTile';
+import GameTile from '../../../common/GameTile/GameTile';
 import GameFiltering from '../GameFiltering/GameFiltering';
 import { GameDataForTiles } from '../../../types/gameTypes';
 import loadGames from './loadGames';

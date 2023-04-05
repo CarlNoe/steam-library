@@ -1,8 +1,8 @@
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { toggleNav } from '../commonSlice';
-import steamWhite from '../../../assets/images/steamWhite.svg';
-import burger from '../../../assets/images/burger.png';
+import steamWhite from '../../assets/images/steamWhite.svg';
+import burger from '../../assets/images/burger.png';
 
 function Header() {
 	const dispatch = useDispatch();
