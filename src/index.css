@@ -7,3 +7,16 @@
 		@apply bg-steam-darkBlue font-arial text-sm text-steam-light;
 	}
 }
+
+::-webkit-scrollbar {
+	width: 0.5rem;
+}
+
+::-webkit-scrollbar-track {
+	background: #171a21;
+}
+
+::-webkit-scrollbar-thumb {
+	border-radius: 0.5rem;
+	background: #66c0f4;
+}

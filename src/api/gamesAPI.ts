@@ -1,5 +1,10 @@
 import { RawGameData, GameDataForTiles } from '../types/gameTypes';
-import { handleResponse, mapGameData, RawApiData } from './apiUtils';
+import {
+	handleResponse,
+	mapGameData,
+	RawApiData,
+	AutocompleteData,
+} from './apiUtils';
 
 const API_BASE_URL = 'http://localhost:8080';
 
@@ -50,11 +55,14 @@ async function fetchGamesBySearchQueryForAutoCompletion(
 	search: string,
 	size: number,
 	from: number
-): Promise<RawApiData[]> {
+): Promise<AutocompleteData[]> {
 	const response = await fetch(
 		`${API_BASE_URL}/games/from/${from}/size/${size}/searchAutocompletion/${search}`
 	);
-	return handleResponse(response);
+	if (!response.ok) {
+		throw new Error(`Error: ${response.statusText}`);
+	}
+	return response.json();
 }
 
 // Get data formatted for tiles
@@ -100,7 +108,7 @@ export async function getGamesBySearchQueryForAutoCompletion(
 	search: string,
 	size: number,
 	from: number
-) {
+): Promise<AutocompleteData[]> {
 	const resultForAutoCompletion =
 		await fetchGamesBySearchQueryForAutoCompletion(search, size, from);
 	return resultForAutoCompletion;

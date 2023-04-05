@@ -17,6 +17,12 @@ export interface RawApiUserData {
 	_source: RawUserData;
 }
 
+export interface AutocompleteData {
+	_id: string;
+	name: string;
+	header_image: string;
+}
+
 export async function handleResponse(
 	response: Response
 ): Promise<RawApiData[]> {
