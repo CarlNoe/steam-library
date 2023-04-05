@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Library from './features/Library/Library';
 import Header from './components/common/Header/Header';
 import Navbar from './components/common/Navbar/Navbar';
+import Favorite from './features/Favorite/Favorite';
 
 function App() {
 	const routes = [
@@ -15,7 +16,7 @@ function App() {
 		},
 		{
 			path: '/favorites',
-			element: <div>Put favorites page in App.tsx</div>,
+			element: <Favorite />,
 		},
 	];
 

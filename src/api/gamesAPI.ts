@@ -27,3 +27,13 @@ export async function searchGames(from: number, size: number, search: string) {
 	);
 	return handleResponse(response);
 }
+
+async function fetchFavoriteGames(): Promise<RawApiData[]> {
+	const response = await fetch(`${API_BASE_URL}/user/favorites`);
+	return handleResponse(response);
+}
+
+export async function getFavoriteGames(): Promise<GameDataForTiles[]> {
+	const rawFavoriteGamesData = await fetchFavoriteGames();
+	return rawFavoriteGamesData.map(mapGameData);
+}
