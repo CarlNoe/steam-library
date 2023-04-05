@@ -28,7 +28,7 @@ function SignUpForm() {
 	};
 
 	return (
-		<div className="flex min-h-screen items-center justify-center">
+		<div className="flex min-h-[calc(100vh-100px)] items-center justify-center">
 			<div className="rounded-lg bg-steam-grey px-12 py-8 shadow-lg">
 				<h1 className="mb-8 text-3xl font-medium text-white">
 					Create an account
