@@ -8,12 +8,15 @@ import GameFiltering from '../GameFiltering/GameFiltering';
 import { GameDataForTiles } from '../../../types/gameTypes';
 import loadGames from './loadGames';
 
+const GAMES_PER_PAGE = 30;
+
 function GameList() {
 	const dispatch = useDispatch();
 
 	const [games, setGames] = useState<GameDataForTiles[]>([]);
 	const [loading, setLoading] = useState<boolean>(true);
 	const [page, setPage] = useState<number>(0);
+	const [hasMore, setHasMore] = useState<boolean>(true);
 	const observer = useRef<IntersectionObserver | null>(null);
 	const isMounted = useRef(false);
 	const loadMoreTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -26,7 +29,7 @@ function GameList() {
 
 	const lastGameElementRef = useCallback(
 		(node: HTMLDivElement | null) => {
-			if (loading) return;
+			if (loading || !hasMore) return;
 
 			if (observer.current) observer.current.disconnect();
 			observer.current = new IntersectionObserver((entries) => {
@@ -42,7 +45,7 @@ function GameList() {
 
 			if (node) observer.current.observe(node);
 		},
-		[loading]
+		[loading, hasMore]
 	);
 
 	useEffect(() => {
@@ -57,13 +60,24 @@ function GameList() {
 	useEffect(() => {
 		const loadGamesWrapper = async (page: number) => {
 			setLoading(true);
-			const response = await loadGames(page, currentFilter, search);
+			const response = await loadGames(
+				GAMES_PER_PAGE,
+				page,
+				currentFilter,
+				search
+			);
 			setLoading(false);
 
 			if (page === 0) {
 				setGames(response);
 			} else {
 				setGames((prevGames) => [...prevGames, ...response]);
+			}
+
+			if (response.length < GAMES_PER_PAGE) {
+				setHasMore(false);
+			} else {
+				setHasMore(true);
 			}
 		};
 
