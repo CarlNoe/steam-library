@@ -1,15 +1,35 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 function SignInForm() {
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
 
+	const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+		e.preventDefault();
+		try {
+			const response = await fetch('http://localhost:8080/user/login', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify({ username, password }),
+			});
+			const data = await response.json();
+			const { ...userData } = data;
+
+			// Stockage du reste des données dans le local storage
+			localStorage.setItem('userData', JSON.stringify(userData));
+		} catch (error) {
+			throw new Error(String(error));
+		}
+	};
+
 	return (
 		<div className="flex  min-h-screen items-center justify-center">
 			<div className="rounded-lg bg-steam-grey px-12 py-8 shadow-lg">
 				<h1 className="mb-8 text-3xl font-medium text-white">Sign In</h1>
-				<form method="POST" action="http://localhost:8080/user/login">
+				<form onSubmit={handleFormSubmit}>
 					<div className="mb-6">
 						<label
 							htmlFor="username"
