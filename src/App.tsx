@@ -1,10 +1,12 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Library from './features/Library/Library';
 import Header from './components/common/Header/Header';
 import Navbar from './components/common/Navbar/Navbar';
 import Favorite from './features/Favorite/Favorite';
 import SignUp from './features/SignUp/signUpForm';
 import SignIn from './features/SignIn/signInForm';
+
+import Library from './features/Library/Library';
+import GameDetails from './features/Library/GameDetails/GameDetails';
 
 function App() {
 	const routes = [
@@ -23,6 +25,10 @@ function App() {
 		{
 			path: '/favorites',
 			element: <Favorite />,
+		},
+		{
+			path: '/games/:id',
+			element: <GameDetails />,
 		},
 	];
 

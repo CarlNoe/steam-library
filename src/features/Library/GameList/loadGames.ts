@@ -4,7 +4,7 @@ import {
 	getGamesBySearchQueryForTiles,
 } from '../../../api/gamesAPI';
 import { GameDataForTiles } from '../../../types/gameTypes';
-import splitFilterValueString from '../../../utils/utils';
+import { splitFilterValueString } from '../../../utils/utils';
 import { FilterValue } from '../../../types/gameFilteringTypes';
 
 const loadGames = async (
