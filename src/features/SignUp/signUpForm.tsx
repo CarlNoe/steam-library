@@ -20,7 +20,8 @@ function SignUpForm() {
 			const { ...userData } = data;
 
 			// Stockage du reste des données dans le local storage
-			localStorage.setItem('userData', JSON.stringify(userData));
+			localStorage.setItem('registerData', JSON.stringify(userData));
+			window.location.href = '/SignIn';
 		} catch (error) {
 			throw new Error(String(error));
 		}
@@ -97,6 +98,7 @@ function SignUpForm() {
 						>
 							Sign Up
 						</button>
+
 						<Link
 							to="/SignIn"
 							className="ml-4 font-medium hover:text-indigo-400"

@@ -1,4 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { RootState } from '../../../app/store';
 import { toggleNav } from '../commonSlice';
 import avatar from '../../../assets/images/avatar.gif';
@@ -6,18 +7,29 @@ import NavbarLink from './NavbarLink/NavbarLink';
 
 const Links = [
 	{
-		url: '/SignIn',
-		name: 'Sign In',
-	},
-	{
 		url: '/',
 		name: 'Library',
 	},
-	{
-		url: '/favorites',
-		name: 'Favorites',
-	},
-];
+].concat(
+	localStorage.getItem('userData') !== null
+		? [
+				{
+					url: '/favorites',
+					name: 'Favorites',
+				},
+		  ]
+		: [
+				{
+					url: '/SignIn',
+					name: 'Sign In',
+				},
+		  ]
+);
+
+function SignOut() {
+	localStorage.clear();
+	window.location.href = '/';
+}
 
 function Navbar() {
 	const dispatch = useDispatch();
@@ -48,7 +60,9 @@ function Navbar() {
 							alt="Avatar"
 							className="mr-4 h-10 w-10 rounded-full"
 						/>
-						<span className="text-xl opacity-80">Username</span>
+						<span className="text-xl opacity-80">
+							{JSON.parse(localStorage.getItem('userData') || '{}').username}
+						</span>
 					</div>
 					<span className="opacity-80">Cart (0)</span>
 					<span className="opacity-80">Wallet (2,67€)</span>
@@ -57,6 +71,17 @@ function Navbar() {
 					{Links.map((link) => (
 						<NavbarLink key={link.url} name={link.name} url={link.url} />
 					))}
+				</div>
+				<div className="flex justify-center">
+					<Link to="/">
+						<button
+							type="button"
+							className="absolute bottom-0"
+							onClick={SignOut}
+						>
+							Sign Out{' '}
+						</button>
+					</Link>
 				</div>
 			</aside>
 			{/* Background blur: */}

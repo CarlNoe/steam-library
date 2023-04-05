@@ -19,7 +19,8 @@ function SignInForm() {
 			const { ...userData } = data;
 
 			// Stockage du reste des données dans le local storage
-			localStorage.setItem('registerData', JSON.stringify(userData));
+			localStorage.setItem('userData', JSON.stringify(userData));
+			window.location.href = '/';
 		} catch (error) {
 			throw new Error(String(error));
 		}
@@ -45,8 +46,11 @@ function SignInForm() {
 							required
 							value={username}
 							onChange={(e) => setUsername(e.target.value)}
-							className="w-full appearance-none rounded border border-gray-600 px-3 py-2 leading-tight text-white focus:border-indigo-500 focus:outline-none"
-							placeholder="you@example.com"
+							className="w-full appearance-none rounded border border-gray-600 px-3 py-2 leading-tight text-black focus:border-indigo-500 focus:outline-none"
+							placeholder={
+								JSON.parse(localStorage.getItem('registerData') || '{}')
+									.username
+							}
 						/>
 					</div>
 					<div className="mb-6">
@@ -64,7 +68,7 @@ function SignInForm() {
 							required
 							value={password}
 							onChange={(e) => setPassword(e.target.value)}
-							className="w-full appearance-none rounded border border-gray-600 px-3 py-2 leading-tight text-white focus:border-indigo-500 focus:outline-none"
+							className="w-full appearance-none rounded border border-gray-600 px-3 py-2 leading-tight text-black focus:border-indigo-500 focus:outline-none"
 							placeholder="********"
 						/>
 					</div>
