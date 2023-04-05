@@ -7,6 +7,7 @@ import GameTile from '../../../common/GameTile/GameTile';
 import GameFiltering from '../GameFiltering/GameFiltering';
 import { GameDataForTiles } from '../../../types/gameTypes';
 import loadGames from './loadGames';
+import LoadingAnimation from '../../../common/LoadinAnimation/LoadingAnimation';
 
 const GAMES_PER_PAGE = 30;
 
@@ -111,7 +112,7 @@ function GameList() {
 					/>
 				</div>
 			))}
-			{loading && <div>Loading...</div>}
+			{loading && <LoadingAnimation />}
 		</main>
 	);
 }
