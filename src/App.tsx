@@ -1,7 +1,9 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Library from './features/Library/Library';
 import Header from './components/common/Header/Header';
 import Navbar from './components/common/Navbar/Navbar';
+
+import Library from './features/Library/Library';
+import GameDetails from './features/GameDetails/GameDetails';
 
 function App() {
 	const routes = [
@@ -16,6 +18,10 @@ function App() {
 		{
 			path: '/favorites',
 			element: <div>Put favorites page in App.tsx</div>,
+		},
+		{
+			path: '/games/:id',
+			element: <GameDetails />,
 		},
 	];
 
