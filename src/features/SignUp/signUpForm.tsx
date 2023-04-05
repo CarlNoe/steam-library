@@ -96,7 +96,7 @@ function SignUpForm() {
 							type="submit"
 							className="focus:shadow-outline-indigo rounded bg-indigo-500 px-6 py-2 font-medium text-white hover:bg-indigo-400 focus:outline-none"
 						>
-							<Link to="/SignIn">Sign Up</Link>
+							Sign Up
 						</button>
 
 						<Link
