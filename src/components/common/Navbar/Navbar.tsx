@@ -6,8 +6,8 @@ import NavbarLink from './NavbarLink/NavbarLink';
 
 const Links = [
 	{
-		url: '/auth',
-		name: 'Login/register',
+		url: '/SignIn',
+		name: 'Sign In',
 	},
 	{
 		url: '/',
