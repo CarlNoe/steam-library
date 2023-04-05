@@ -1,9 +1,11 @@
+import { Link } from 'react-router-dom';
 import React from 'react';
 import windows from '../../../assets/images/windows.png';
 import mac from '../../../assets/images/mac.png';
 import linux from '../../../assets/images/linux.png';
 
 interface GameTileProps {
+	link: string;
 	name: string;
 	headerImage: string;
 	price: string;
@@ -15,6 +17,7 @@ interface GameTileProps {
 
 const GameTile = React.memo((props: GameTileProps) => {
 	const {
+		link,
 		name,
 		headerImage,
 		price,
@@ -31,26 +34,30 @@ const GameTile = React.memo((props: GameTileProps) => {
 	);
 
 	return (
-		<div className="mb-2 flex h-20 bg-steam-dark bg-opacity-40 p-2">
-			<div className="flex flex-shrink-0 flex-col justify-between">
-				<img src={headerImage} alt={name} className="h-12" />
-				<div className="flex items-center justify-between font-motiva text-[11px]">
-					<span className="opacity-[50%]">{releaseDate}</span>
-					<span className="text-steam-lightBlue">{averageRating}%</span>
+		<Link to={link}>
+			<div className="mb-2 flex h-20 bg-steam-dark bg-opacity-40 p-2">
+				<div className="flex flex-shrink-0 flex-col justify-between">
+					<img src={headerImage} alt={name} className="h-12" />
+					<div className="flex items-center justify-between font-motiva text-[11px]">
+						<span className="opacity-[50%]">{releaseDate}</span>
+						<span className="text-steam-lightBlue">{averageRating}%</span>
+					</div>
+				</div>
+				<div className="ml-2 flex w-full flex-col justify-between">
+					<h3 className="font-motiva">{name}</h3>
+					<div className="flex opacity-50">
+						{platforms.includes('windows') && (
+							<img src={windows} alt="Windows" />
+						)}
+						{platforms.includes('mac') && <img src={mac} alt="Mac" />}
+						{platforms.includes('linux') && <img src={linux} alt="Linux" />}
+					</div>
+					<span className="self-end text-xs font-bold">
+						{Number(price) > 0 ? `${price}€` : 'Free-to-play'}
+					</span>
 				</div>
 			</div>
-			<div className="ml-2 flex w-full flex-col justify-between">
-				<h3 className="font-motiva">{name}</h3>
-				<div className="flex opacity-50">
-					{platforms.includes('windows') && <img src={windows} alt="Windows" />}
-					{platforms.includes('mac') && <img src={mac} alt="Mac" />}
-					{platforms.includes('linux') && <img src={linux} alt="Linux" />}
-				</div>
-				<span className="self-end text-xs font-bold">
-					{Number(price) > 0 ? `${price}€` : 'Free-to-play'}
-				</span>
-			</div>
-		</div>
+		</Link>
 	);
 });
 

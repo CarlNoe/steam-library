@@ -1,6 +1,5 @@
 import { useEffect, useState, useRef, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { RootState } from '../../../app/store';
 import { resetFilter } from '../librarySlice';
 
@@ -96,22 +95,21 @@ function GameList() {
 		<main className="p-2">
 			<GameFiltering />
 			{games.map((game: GameDataForTiles, index: number) => (
-				<Link to={`/games/${game.docId}`} key={game.docId}>
-					<div
-						ref={index === games.length - 1 ? lastGameElementRef : null}
-						key={game.docId}
-					>
-						<GameTile
-							name={game.name}
-							headerImage={game.headerImage}
-							price={game.price}
-							releaseDate={game.releaseDate}
-							positiveRatings={game.positiveRatings}
-							negativeRatings={game.negativeRatings}
-							platforms={game.platforms}
-						/>
-					</div>
-				</Link>
+				<div
+					ref={index === games.length - 1 ? lastGameElementRef : null}
+					key={game.docId}
+				>
+					<GameTile
+						link={`/games/${game.docId}`}
+						name={game.name}
+						headerImage={game.headerImage}
+						price={game.price}
+						releaseDate={game.releaseDate}
+						positiveRatings={game.positiveRatings}
+						negativeRatings={game.negativeRatings}
+						platforms={game.platforms}
+					/>
+				</div>
 			))}
 			{loading && <div>Loading...</div>}
 		</main>

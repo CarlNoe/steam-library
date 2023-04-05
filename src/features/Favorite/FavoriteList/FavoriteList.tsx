@@ -23,6 +23,7 @@ function FavoriteList() {
 			{favorites.map((favorite: GameDataForTiles) => (
 				<div key={favorite.docId}>
 					<GameTile
+						link={`/games/${favorite.docId}`}
 						name={favorite.name}
 						headerImage={favorite.headerImage}
 						price={favorite.price}
