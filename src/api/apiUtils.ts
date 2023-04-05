@@ -1,4 +1,5 @@
 import { RawGameData, GameDataForTiles } from '../types/gameTypes';
+import { RawUserData } from '../types/userTypes';
 
 export interface RawApiData {
 	_index: string;
@@ -6,6 +7,14 @@ export interface RawApiData {
 	_score: number;
 	_ignored: string[];
 	_source: RawGameData;
+}
+
+export interface RawApiUserData {
+	_index: string;
+	_id: string;
+	_score: number;
+	_ignored: string[];
+	_source: RawUserData;
 }
 
 export async function handleResponse(
