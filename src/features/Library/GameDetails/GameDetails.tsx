@@ -9,6 +9,7 @@ import GameRating from './GameRating/GameRating';
 import GameTags from './GameTags/GameTags';
 import GameAddToCart from './GameAddToCart/GameAddToCart';
 import GameDetailedDesc from './GameDetailedDesc/GameDetailedDesc';
+import GameAddToFavBtn from './GameAddToFavBtn/GameAddToFavBtn';
 
 function GameDetails() {
 	const { id } = useParams<{ id: string | undefined }>();
@@ -69,12 +70,7 @@ function GameDetails() {
 						negativeRatings={negativeRatings}
 					/>
 					<GameCarousel mediaItems={mediaItems} />
-					<button
-						type="button"
-						className="mb-4 rounded-sm bg-steam-darkBlue px-4 py-2 font-bold text-steam-lightBlue"
-					>
-						Add to Favorites
-					</button>
+					<GameAddToFavBtn gameId={id} />
 					<GameAddToCart price={price} name={name} />
 					<GameDetailedDesc detailedDesc={detailedDescription} />
 				</div>

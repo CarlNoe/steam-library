@@ -11,6 +11,7 @@ function getTokenFromLocalStorage(): string | null {
 	}
 	return null;
 }
+
 async function fetchFavoriteGames(): Promise<RawApiData[]> {
 	const token = getTokenFromLocalStorage();
 	const response = await fetch(`${API_BASE_URL}/user/favorites`, {
@@ -21,9 +22,18 @@ async function fetchFavoriteGames(): Promise<RawApiData[]> {
 	return handleResponse(response);
 }
 
-async function getFavoriteGames(): Promise<GameDataForTiles[]> {
+export async function getFavoriteGames(): Promise<GameDataForTiles[]> {
 	const rawFavoriteGamesData = await fetchFavoriteGames();
 	return rawFavoriteGamesData.map(mapGameData);
 }
 
-export default getFavoriteGames;
+export async function addGameToFavorites(gameId: string): Promise<void> {
+	const token = getTokenFromLocalStorage();
+	const response = await fetch(`${API_BASE_URL}/user/add/favorite/${gameId}`, {
+		method: 'POST',
+		headers: {
+			Authorization: `Bearer ${token}`,
+		},
+	});
+	await handleResponse(response);
+}
