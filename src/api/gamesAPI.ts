@@ -5,7 +5,7 @@ const API_BASE_URL = 'http://localhost:8080';
 
 // Fetch data from API
 
-async function fetchGamesByPagination(
+async function fetchPaginatedGames(
 	from: number,
 	size: number
 ): Promise<RawApiData[]> {
@@ -15,7 +15,7 @@ async function fetchGamesByPagination(
 	return handleResponse(response);
 }
 
-async function fetchGamesByPaginationAndSort(
+async function fetchPaginatedGamesAndSort(
 	from: number,
 	size: number,
 	field: string,
@@ -27,7 +27,7 @@ async function fetchGamesByPaginationAndSort(
 	return handleResponse(response);
 }
 
-async function fetchGamesBySearch(
+async function fetchGamesBySearchQuery(
 	search: string,
 	size: number
 ): Promise<RawApiData[]> {
@@ -39,11 +39,11 @@ async function fetchGamesBySearch(
 
 // Get data formatted for tiles
 
-export async function getGamesByPaginationForTiles(
+export async function getSortedPaginatedGamesForTiles(
 	from: number,
 	size: number
 ): Promise<GameDataForTiles[]> {
-	const rawGameData = await fetchGamesByPagination(from, size);
+	const rawGameData = await fetchPaginatedGames(from, size);
 	return rawGameData.map(mapGameData);
 }
 
@@ -53,7 +53,7 @@ export async function getGamesByPaginationAndSortForTiles(
 	field: string,
 	order: string
 ): Promise<GameDataForTiles[]> {
-	const rawGameData = await fetchGamesByPaginationAndSort(
+	const rawGameData = await fetchPaginatedGamesAndSort(
 		from,
 		size,
 		field,
@@ -62,10 +62,10 @@ export async function getGamesByPaginationAndSortForTiles(
 	return rawGameData.map(mapGameData);
 }
 
-export async function getGamesBySearchForTiles(
+export async function getGamesBySearchQueryForTiles(
 	search: string,
 	size: number
 ): Promise<GameDataForTiles[]> {
-	const rawGameData = await fetchGamesBySearch(search, size);
+	const rawGameData = await fetchGamesBySearchQuery(search, size);
 	return rawGameData.map(mapGameData);
 }
