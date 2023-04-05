@@ -7,6 +7,7 @@ import GameMainInfos from './GameMainInfos/GameMainInfos';
 import GameRating from './GameRating/GameRating';
 import GameTags from './GameTags/GameTags';
 import GameAddToCart from './GameAddToCart/GameAddToCart';
+import GameDetailedDesc from './GameDetailedDesc/GameDetailedDesc';
 
 function GameDetails() {
 	const { id } = useParams<{ id: string | undefined }>();
@@ -40,7 +41,7 @@ function GameDetails() {
 		// screenshots,
 		// background,
 		// movies,
-		// detailed_description: detailedDescription,
+		detailed_description: detailedDescription,
 		short_description: shortDescription,
 	} = gameDetails;
 
@@ -71,7 +72,7 @@ function GameDetails() {
 				</button>
 				{/* todo: add an indicator if already favorited */}
 				<GameAddToCart price={price} name={name} />
-				<div>{/* detailed desc to html element */}</div>
+				<GameDetailedDesc detailedDesc={detailedDescription} />
 			</div>
 		</main>
 	);
