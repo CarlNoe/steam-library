@@ -1,5 +1,4 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { RootState } from '../../app/store';
 import { toggleNav } from '../commonSlice';
 import avatar from '../../assets/images/avatar.gif';
@@ -75,7 +74,7 @@ function Navbar() {
 					))}
 				</div>
 				<div className="flex justify-center">
-					<Link to="/">
+					{localStorage.getItem('userData') != null ? (
 						<button
 							type="button"
 							className="absolute bottom-0"
@@ -83,7 +82,9 @@ function Navbar() {
 						>
 							Sign Out{' '}
 						</button>
-					</Link>
+					) : (
+						<div />
+					)}
 				</div>
 			</aside>
 			{/* Background blur: */}
