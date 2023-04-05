@@ -61,7 +61,9 @@ function Navbar() {
 							className="mr-4 h-10 w-10 rounded-full"
 						/>
 						<span className="text-xl opacity-80">
-							{JSON.parse(localStorage.getItem('userData') || '{}').username}
+							{JSON.parse(localStorage.getItem('userData') || '{}').username
+								? JSON.parse(localStorage.getItem('userData') || '{}').username
+								: 'Not connected'}
 						</span>
 					</div>
 					<span className="opacity-80">Cart (0)</span>
