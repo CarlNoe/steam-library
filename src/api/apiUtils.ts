@@ -1,6 +1,7 @@
 import { RawGameData, GameDataForTiles } from '../types/gameTypes';
 
 export interface RawApiData {
+	status: number;
 	_index: string;
 	_id: string;
 	_score: number;
