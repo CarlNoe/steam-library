@@ -14,8 +14,8 @@
     <img src="https://user-images.githubusercontent.com/78510016/230234340-01036855-093e-4136-bce0-cdd51e1ef27f.png" width="32%" />
     <img src="https://user-images.githubusercontent.com/78510016/230233170-952cff19-56a8-4ed0-9465-9a047c21cd9c.png" width="32%" />
 </div>
-
-To run the project, run 
-```npm install```
-Then
-```npm run dev```
+    <br />
+    <br/>
+    <p align="center">
+      To run the project, run "npm install" then "npm run dev"
+    </p>
